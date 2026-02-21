@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🪙 Crypto Tracker</h1>
+    <p class="subtitle">Live prices powered by CoinGecko</p>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search coin..." />
+    <select id="currency">
+      <option value="usd">USD ($)</option>
+      <option value="eur">EUR (€)</option>
+      <option value="gbp">GBP (£)</option>
+    </select>
+    <button id="refresh-btn">⟳ Refresh</button>
+  </div>
+
+  <div id="status-bar">
+    <span id="last-updated"></span>
+    <span id="countdown"></span>
+  </div>
+
+  <div id="loader" class="hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <div id="error-msg" class="hidden"></div>
+
+  <div id="coins-grid"></div>
+
+  <footer>
+    Data refreshes every 60 seconds &bull; Source: <a href="https://www.coingecko.com" target="_blank">CoinGecko</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
