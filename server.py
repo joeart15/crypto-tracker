@@ -6,9 +6,13 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 
-PORT = 3000
+PORT = int(os.environ.get("PORT", 3000))
+COINGECKO_BASE = os.environ.get(
+    "COINGECKO_BASE_URL",
+    "https://api.coingecko.com/api/v3"
+)
 API_URL = (
-    "https://api.coingecko.com/api/v3/coins/markets"
+    "{base}/coins/markets"
     "?vs_currency={currency}&order=market_cap_desc"
     "&per_page=20&page=1&sparkline=false&price_change_percentage=24h"
 )
@@ -31,7 +35,7 @@ class Handler(SimpleHTTPRequestHandler):
         if "currency=" in self.path:
             currency = self.path.split("currency=")[-1].split("&")[0]
 
-        url = API_URL.format(currency=currency)
+        url = API_URL.format(base=COINGECKO_BASE, currency=currency)
         try:
             req = Request(url, headers={"User-Agent": "CryptoTracker/1.0"})
             with urlopen(req, timeout=10) as resp:
